@@ -1,0 +1,34 @@
+{
+  "title": "Provision EC2 instances behind an Application Load Balancer",
+  "difficulty": "Proficient",
+  "pairing_mode": "paired",
+  "total_hours": 3.0,
+  "counts": {
+    "simulations": 1,
+    "practical_assessments": 1,
+    "mcq_assessments": 0
+  },
+  "exercises": [
+    {
+      "kind": "simulation",
+      "index": 1,
+      "hours": 1.5,
+      "title": "Restore and Prove a Secure Load-Balanced Application"
+    },
+    {
+      "kind": "practical-assessment",
+      "index": 1,
+      "paired_simulation_index": 1,
+      "hours": 1.5,
+      "title": "Provision and Validate EC2 Targets Behind an Application Load Balancer"
+    }
+  ],
+  "requirement_ids": [
+    "REQ-001",
+    "REQ-002"
+  ],
+  "source_paths": [
+    "prior-samples/selection.md",
+    "prior-samples/source-excerpt.md"
+  ]
+}

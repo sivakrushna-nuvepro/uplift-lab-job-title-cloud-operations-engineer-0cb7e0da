@@ -1,0 +1,42 @@
+{
+  "incident_id": "INC-ALB-017",
+  "seeded_fault": {
+    "parameter": "health_check_path",
+    "configured_value": "/healthz",
+    "required_value": "/ready"
+  },
+  "observations": [
+    {
+      "source": "target-health",
+      "target_id": "i-0acmeapp01",
+      "state": "healthy"
+    },
+    {
+      "source": "target-health",
+      "target_id": "i-0acmeapp02",
+      "state": "unhealthy",
+      "reason": "Target.ResponseCodeMismatch"
+    },
+    {
+      "source": "application-log",
+      "target_id": "i-0acmeapp02",
+      "request": "GET /healthz",
+      "status_code": 404
+    },
+    {
+      "source": "application-log",
+      "target_id": "i-0acmeapp02",
+      "request": "GET /ready",
+      "status_code": 200
+    },
+    {
+      "source": "network-check",
+      "target_id": "i-0acmeapp02",
+      "port": 8080,
+      "reachable_from_security_group_id": "sg-0alb001",
+      "result": "success"
+    }
+  ],
+  "supported_diagnosis": "The target group requested /healthz, which returned 404; the approved /ready endpoint returned 200.",
+  "supported_correction": "Change the target-group health-check path from /healthz to /ready without widening instance ingress."
+}

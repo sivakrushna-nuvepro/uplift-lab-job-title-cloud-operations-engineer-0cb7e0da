@@ -1,0 +1,32 @@
+{
+  "brief_id": "ADB-001",
+  "application": "acme-operations-demo",
+  "approved_image_id": "ami-0acme2025001",
+  "instance_type": "t3.micro",
+  "instance_count": 2,
+  "intended_instance_ids": [
+    "i-0acmeapp01",
+    "i-0acmeapp02"
+  ],
+  "load_balancer_id": "alb-acme-ops",
+  "target_group_id": "tg-acme-app",
+  "public_listener": {
+    "protocol": "HTTPS",
+    "port": 443
+  },
+  "application_listener": {
+    "protocol": "HTTP",
+    "port": 8080
+  },
+  "expected_health_endpoint": {
+    "path": "/ready",
+    "status_code": 200
+  },
+  "minimum_successful_endpoint_requests": 6,
+  "required_resource_categories": [
+    "ec2",
+    "load-balancer",
+    "target-group",
+    "security-group"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "record_status": "learner-draft",
+  "brief_id": "ADB-001",
+  "incident_id": "INC-ALB-017",
+  "deployment": {
+    "application": "acme-operations-demo",
+    "image_id": "ami-0acme2025001",
+    "instances": [],
+    "listener": {},
+    "target_group": {}
+  },
+  "security": {
+    "load_balancer_security_group": {
+      "security_group_id": "sg-0alb001",
+      "inbound_rules": []
+    },
+    "instance_security_group": {
+      "security_group_id": "sg-0app001",
+      "inbound_rules": []
+    }
+  },
+  "validation": {
+    "observed_at": null,
+    "target_health": [],
+    "requests": [],
+    "listener_observation": null,
+    "instance_ingress_observation": null
+  },
+  "diagnosis": {
+    "cause": "TODO",
+    "supporting_observations": [],
+    "rejected_alternatives": [],
+    "correction": "TODO"
+  },
+  "rollback": {
+    "trigger": "TODO",
+    "action": "TODO",
+    "validation_after_rollback": null
+  },
+  "inventory": [],
+  "cleanup": {
+    "removed_resource_ids": [],
+    "final_check_at": null,
+    "remaining_chargeable_resource_count": null,
+    "evidence": []
+  },
+  "copilot_review": {
+    "sanitized_input_confirmed": false,
+    "statements_verified_against_aws": false,
+    "corrections_made": [],
+    "reviewer_note": null
+  }
+}

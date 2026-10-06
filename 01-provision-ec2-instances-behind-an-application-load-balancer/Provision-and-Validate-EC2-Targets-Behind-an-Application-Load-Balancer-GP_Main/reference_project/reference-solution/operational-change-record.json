@@ -1,0 +1,154 @@
+{
+  "record_status": "verified",
+  "change_id": "CHG-ALB-001",
+  "deployment": {
+    "instances": [
+      {
+        "instance_id": "i-0acmeapp01",
+        "instance_type": "t3.micro",
+        "subnet_id": "subnet-0aaa1111"
+      },
+      {
+        "instance_id": "i-0acmeapp02",
+        "instance_type": "t3.micro",
+        "subnet_id": "subnet-0bbb2222"
+      }
+    ],
+    "listener": {
+      "load_balancer_id": "alb-acme-ops",
+      "port": 443,
+      "protocol": "HTTPS",
+      "default_target_group_id": "tg-acme-app"
+    },
+    "target_group": {
+      "target_group_id": "tg-acme-app",
+      "protocol": "HTTP",
+      "port": 8080,
+      "health_check_path": "/ready",
+      "healthy_status_codes": [
+        200
+      ]
+    }
+  },
+  "security": {
+    "load_balancer_security_group": {
+      "security_group_id": "sg-0alb001",
+      "inbound_rules": [
+        {
+          "protocol": "tcp",
+          "from_port": 443,
+          "to_port": 443,
+          "source": "0.0.0.0/0"
+        }
+      ]
+    },
+    "instance_security_group": {
+      "security_group_id": "sg-0app001",
+      "inbound_rules": [
+        {
+          "protocol": "tcp",
+          "from_port": 8080,
+          "to_port": 8080,
+          "source_security_group_id": "sg-0alb001"
+        }
+      ]
+    }
+  },
+  "validation": {
+    "target_health": [
+      {
+        "instance_id": "i-0acmeapp01",
+        "state": "healthy"
+      },
+      {
+        "instance_id": "i-0acmeapp02",
+        "state": "healthy"
+      }
+    ],
+    "requests": [
+      {
+        "request_number": 1,
+        "status_code": 200,
+        "instance_id": "i-0acmeapp01"
+      },
+      {
+        "request_number": 2,
+        "status_code": 200,
+        "instance_id": "i-0acmeapp02"
+      },
+      {
+        "request_number": 3,
+        "status_code": 200,
+        "instance_id": "i-0acmeapp01"
+      },
+      {
+        "request_number": 4,
+        "status_code": 200,
+        "instance_id": "i-0acmeapp02"
+      },
+      {
+        "request_number": 5,
+        "status_code": 200,
+        "instance_id": "i-0acmeapp01"
+      },
+      {
+        "request_number": 6,
+        "status_code": 200,
+        "instance_id": "i-0acmeapp02"
+      }
+    ]
+  },
+  "diagnosis": {
+    "cause": "The target group requested /healthz, which returned 404; the approved /ready endpoint returned 200.",
+    "correction": "Change the target-group health-check path from /healthz to /ready without widening instance ingress."
+  },
+  "rollback": {
+    "trigger": "Rollback if either intended target becomes unhealthy after the health-check change or repeated requests no longer return HTTP 200 through the load balancer.",
+    "action": "Restore the previous target-group health-check path, deregister the new targets, restore the prior listener default action, and verify the former service state before investigating further."
+  },
+  "inventory": [
+    {
+      "category": "ec2",
+      "resource_ids": [
+        "i-0acmeapp01",
+        "i-0acmeapp02"
+      ]
+    },
+    {
+      "category": "load-balancer",
+      "resource_ids": [
+        "alb-acme-ops"
+      ]
+    },
+    {
+      "category": "target-group",
+      "resource_ids": [
+        "tg-acme-app"
+      ]
+    },
+    {
+      "category": "security-group",
+      "resource_ids": [
+        "sg-0alb001",
+        "sg-0app001"
+      ]
+    }
+  ],
+  "cleanup": {
+    "removed_resource_ids": [
+      "i-0acmeapp01",
+      "i-0acmeapp02",
+      "alb-acme-ops",
+      "tg-acme-app",
+      "sg-0alb001",
+      "sg-0app001"
+    ],
+    "remaining_chargeable_resource_count": 0,
+    "final_cost_check": "No learner-created chargeable resources remain."
+  },
+  "copilot_handoff": {
+    "evidence_was_sanitized": true,
+    "statements_verified_against_aws_evidence": true,
+    "summary": "Two intended EC2 targets were placed in the approved subnets behind the HTTPS Application Load Balancer listener. The unhealthy-target evidence showed that /healthz returned 404 while /ready returned 200, so the target-group health-check path was corrected without widening instance ingress. Both targets became healthy, six HTTP 200 requests observed both instance identifiers, and all inventoried learner-created resources were removed after evidence capture."
+  }
+}

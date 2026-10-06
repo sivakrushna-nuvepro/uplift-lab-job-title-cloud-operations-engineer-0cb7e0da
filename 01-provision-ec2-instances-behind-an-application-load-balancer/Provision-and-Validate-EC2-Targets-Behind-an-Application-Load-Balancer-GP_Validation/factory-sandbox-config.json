@@ -1,0 +1,38 @@
+{
+  "environment": "browser-workspace",
+  "tools": [
+    {
+      "name": "AWS Management Console",
+      "purpose": "Provision, diagnose, validate, and remove the sandbox EC2 and Application Load Balancer resources."
+    },
+    {
+      "name": "Microsoft 365 Copilot",
+      "purpose": "Structure sanitized observations into an operational handoff that the learner verifies against AWS evidence."
+    },
+    {
+      "name": "Python",
+      "purpose": "Parse and validate the shipped project metadata using the source-defined runtime."
+    },
+    {
+      "name": "pytest",
+      "purpose": "Run the frozen repository validation suite with python -m pytest -q."
+    },
+    {
+      "name": "Workspace text editor",
+      "purpose": "Edit and validate the learner-owned operational change record without exposing the reference solution."
+    },
+    {
+      "name": "Workspace JSON editor",
+      "purpose": "Complete and inspect the learner operational change record without exposing the reference solution."
+    }
+  ],
+  "preloadFiles": [
+    "practice_project/lab_manifest.json",
+    "practice_project/guided-instructions/simulation.md",
+    "practice_project/practice-solution/operational-change-record.template.json",
+    "practice_project/assessment/practical-assessment.md",
+    "validation/fixtures/deployment_brief.json",
+    "validation/fixtures/network_card.json",
+    "validation/fixtures/health_incident_card.json"
+  ]
+}

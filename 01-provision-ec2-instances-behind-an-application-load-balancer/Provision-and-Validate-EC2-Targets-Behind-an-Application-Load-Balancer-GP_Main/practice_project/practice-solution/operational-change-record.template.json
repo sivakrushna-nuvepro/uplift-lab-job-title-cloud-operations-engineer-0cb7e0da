@@ -1,0 +1,69 @@
+{
+  "record_status": "learner-draft",
+  "record_title": "Provision EC2 instances behind an Application Load Balancer",
+  "brief_id": "ADB-001",
+  "network_card_id": "SNC-001",
+  "incident_id": "INC-ALB-017",
+  "requirements": [
+    "REQ-001",
+    "REQ-002"
+  ],
+  "deployment": {
+    "application": "acme-operations-demo",
+    "image_id": "ami-0acme2025001",
+    "vpc_id": "vpc-0acme001",
+    "instances": [],
+    "listener": {
+      "load_balancer_id": "",
+      "port": null,
+      "protocol": "",
+      "default_target_group_id": ""
+    },
+    "target_group": {
+      "target_group_id": "",
+      "protocol": "",
+      "port": null,
+      "health_check_path": "",
+      "healthy_status_codes": []
+    }
+  },
+  "security": {
+    "load_balancer_security_group": {
+      "security_group_id": "sg-0alb001",
+      "inbound_rules": []
+    },
+    "instance_security_group": {
+      "security_group_id": "sg-0app001",
+      "inbound_rules": []
+    }
+  },
+  "validation": {
+    "captured_before_teardown": false,
+    "target_health": [],
+    "requests": [],
+    "security_observations": []
+  },
+  "diagnosis": {
+    "cause": "TODO",
+    "supporting_evidence": [],
+    "alternatives_ruled_out": [],
+    "correction": "TODO",
+    "post_correction_result": "TODO"
+  },
+  "rollback": {
+    "trigger": "TODO",
+    "action": "TODO",
+    "validation_after_rollback": "TODO"
+  },
+  "resource_inventory": [],
+  "cleanup": {
+    "removed_resource_ids": [],
+    "final_check_evidence": [],
+    "remaining_chargeable_resource_count": null
+  },
+  "copilot_review": {
+    "evidence_sanitized": false,
+    "statements_verified_by_learner": false,
+    "corrections_made": []
+  }
+}

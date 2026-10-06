@@ -1,0 +1,21 @@
+{
+  "title": "Provision and Validate EC2 Targets Behind an Application Load Balancer",
+  "items": [
+    {
+      "component": "critical_live_validation",
+      "critical_gate": true,
+      "gate_id": "GATE-1",
+      "evidence": "Before teardown, the record must show exactly two intended healthy targets, at least six successful load-balancer requests observing both instance IDs, and application-port ingress sourced only from the load balancer security group."
+    },
+    {
+      "component": "diagnosis_and_rollback",
+      "critical_gate": false,
+      "evidence": "The record must identify the /healthz response-code mismatch, document the correction to /ready without widening ingress, and provide a reproducible rollback trigger and action."
+    },
+    {
+      "component": "inventory_and_cleanup",
+      "critical_gate": false,
+      "evidence": "The record must inventory the learner-created EC2, load-balancer, target-group, and security-group resources, show every inventoried ID removed, and report zero remaining chargeable resources."
+    }
+  ]
+}

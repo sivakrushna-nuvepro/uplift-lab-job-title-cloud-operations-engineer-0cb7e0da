@@ -1,0 +1,28 @@
+{
+  "card_id": "SNC-001",
+  "vpc_id": "vpc-0acme001",
+  "approved_subnets": [
+    {
+      "subnet_id": "subnet-0aaa1111",
+      "availability_zone": "us-east-1a"
+    },
+    {
+      "subnet_id": "subnet-0bbb2222",
+      "availability_zone": "us-east-1b"
+    }
+  ],
+  "load_balancer_security_group_id": "sg-0alb001",
+  "instance_security_group_id": "sg-0app001",
+  "required_public_ingress": {
+    "protocol": "tcp",
+    "from_port": 443,
+    "to_port": 443,
+    "source": "0.0.0.0/0"
+  },
+  "required_instance_ingress": {
+    "protocol": "tcp",
+    "from_port": 8080,
+    "to_port": 8080,
+    "source_security_group_id": "sg-0alb001"
+  }
+}
